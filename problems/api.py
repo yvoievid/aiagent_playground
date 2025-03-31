@@ -49,6 +49,9 @@ class Problem():
         self.compile()
 
         self._ai_src = ai_src
+        print("_cfn_name",self._cfn_name)
+        print("_ai_src", self._ai_src)
+
         self._ai_cfn = C.optimize(copy.deepcopy(self.fn), self.signature, self._cfn_name, self._ai_src)
 
     def reset(self):
