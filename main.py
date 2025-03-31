@@ -6,9 +6,9 @@ import sys
 import numpy as np
 
 from problems.api import Problem
+from agent.llm_optimize import LLMOptimizer
 
-
-def run_agent(problem: Problem, ref_out):
+def run_agent(problem: Problem, ref_out, agent: LLMOptimizer):
     llvmir = problem.cfn_src
 
     print('Agent input:')
@@ -18,16 +18,22 @@ def run_agent(problem: Problem, ref_out):
 
     # run your agent here!
     # TODO: for now just return a copy of the original IR
-    optimized = str(llvmir)
-
+    # optimized = str(llvmir)
+    optimized = agent.optimize(llvmir)
+    
+    print('\n================================')
+    print(optimized)
+    print('================================\n')    
+    
     # try to compile the agent-generated IR
-    problem.optimize(optimized)
 
+    problem.optimize(optimized)
+        # problem.ai_cfn(*ref_out)
     # after calling .optimize(), you can use "problem.ai_cfn(*ref_out)" to run your function
     # and perhaps compare it with the reference output
     # if you want to recompile, please call "problem.reset()" before calling "problem.optimize()"
     # again
-
+    
 
 def benchmark(fn, data):
     # return in milliseconds
@@ -64,7 +70,8 @@ def main():
     cref = p.cfn(*p.get_test_data())
     check_the_same(ref, cref)
 
-    run_agent(p, ref)
+    agent = LLMOptimizer()
+    run_agent(p, ref, agent=agent)
 
     ai = p.ai_cfn(*p.get_test_data())
     if not check_the_same(cref, ai):

@@ -1,0 +1,286 @@
+original:
+define i32 @_ZN8problems8problem36matmulB2v1B38c8tJTIeFIjxB2IKSgI4CrvQClQZ6FczSBAA_3dEiii5ArrayIfLi2E1A7mutable7alignedE5ArrayIfLi2E1A7mutable7alignedE({ i8*, i8*, i64, i64, float*, [2 x i64], [2 x i64] }* noalias nocapture writeonly %retptr, { i8*, i32, i8*, i8*, i32 }** noalias nocapture writeonly %excinfo, i32 %arg.m, i32 %arg.k, i32 %arg.n, i8* %arg.A.0, i8* nocapture readnone %arg.A.1, i64 %arg.A.2, i64 %arg.A.3, float* %arg.A.4, i64 %arg.A.5.0, i64 %arg.A.5.1, i64 %arg.A.6.0, i64 %arg.A.6.1, i8* %arg.B.0, i8* nocapture readnone %arg.B.1, i64 %arg.B.2, i64 %arg.B.3, float* %arg.B.4, i64 %arg.B.5.0, i64 %arg.B.5.1, i64 %arg.B.6.0, i64 %arg.B.6.1) local_unnamed_addr {
+entry:
+  tail call void @NRT_incref(i8* %arg.A.0)
+  tail call void @NRT_incref(i8* %arg.B.0)
+  %.13.i.i = sext i32 %arg.m to i64
+  %.14.i.i = sext i32 %arg.k to i64
+  %.15.i.i = icmp slt i32 %arg.m, 0
+  %.24.i.i = icmp slt i32 %arg.k, 0
+  %or.cond.i = select i1 %.15.i.i, i1 true, i1 %.24.i.i
+  br i1 %or.cond.i, label %B0.if, label %B0.endif.endif.i.i, !prof !0
+
+B0.endif.endif.i.i:                               ; preds = %entry
+  %.38.i.i = mul nsw i64 %.14.i.i, %.13.i.i
+  %.42.i.i = shl nsw i64 %.14.i.i, 2
+  %.43.i.i = tail call { i64, i1 } @llvm.smul.with.overflow.i64(i64 %.38.i.i, i64 4)
+  %.45.i.i = extractvalue { i64, i1 } %.43.i.i, 1
+  br i1 %.45.i.i, label %B0.if, label %B0.endif.endif.endif.i.i, !prof !1
+
+B0.endif.endif.endif.i.i:                         ; preds = %B0.endif.endif.i.i
+  %.44.i.i = extractvalue { i64, i1 } %.43.i.i, 0
+  %.7.i.i.i.i = tail call i8* @NRT_MemInfo_alloc_aligned(i64 %.44.i.i, i32 32), !noalias !2
+  %.8.i.i.i.i = icmp eq i8* %.7.i.i.i.i, null
+  br i1 %.8.i.i.i.i, label %B0.if, label %B0.endif.endif, !prof !1
+
+common.ret:                                       ; preds = %B0.if, %B104
+  %common.ret.op = phi i32 [ 0, %B104 ], [ 1, %B0.if ]
+  ret i32 %common.ret.op
+
+B104:                                             ; preds = %B42.B30.loopexit_crit_edge.split.us.us.us, %B32.endif.lr.ph, %B0.endif.endif
+  %retptr.repack = getelementptr inbounds { i8*, i8*, i64, i64, float*, [2 x i64], [2 x i64] }, { i8*, i8*, i64, i64, float*, [2 x i64], [2 x i64] }* %retptr, i64 0, i32 0
+  store i8* %.7.i.i.i.i, i8** %retptr.repack, align 8
+  %retptr.repack7 = getelementptr inbounds { i8*, i8*, i64, i64, float*, [2 x i64], [2 x i64] }, { i8*, i8*, i64, i64, float*, [2 x i64], [2 x i64] }* %retptr, i64 0, i32 1
+  store i8* null, i8** %retptr.repack7, align 8
+  %retptr.repack9 = getelementptr inbounds { i8*, i8*, i64, i64, float*, [2 x i64], [2 x i64] }, { i8*, i8*, i64, i64, float*, [2 x i64], [2 x i64] }* %retptr, i64 0, i32 2
+  store i64 %.38.i.i, i64* %retptr.repack9, align 8
+  %retptr.repack11 = getelementptr inbounds { i8*, i8*, i64, i64, float*, [2 x i64], [2 x i64] }, { i8*, i8*, i64, i64, float*, [2 x i64], [2 x i64] }* %retptr, i64 0, i32 3
+  store i64 4, i64* %retptr.repack11, align 8
+  %retptr.repack13 = getelementptr inbounds { i8*, i8*, i64, i64, float*, [2 x i64], [2 x i64] }, { i8*, i8*, i64, i64, float*, [2 x i64], [2 x i64] }* %retptr, i64 0, i32 4
+  store float* %.6.i1.i.i, float** %retptr.repack13, align 8
+  %retptr.repack15.repack = getelementptr inbounds { i8*, i8*, i64, i64, float*, [2 x i64], [2 x i64] }, { i8*, i8*, i64, i64, float*, [2 x i64], [2 x i64] }* %retptr, i64 0, i32 5, i64 0
+  store i64 %.13.i.i, i64* %retptr.repack15.repack, align 8
+  %retptr.repack15.repack19 = getelementptr inbounds { i8*, i8*, i64, i64, float*, [2 x i64], [2 x i64] }, { i8*, i8*, i64, i64, float*, [2 x i64], [2 x i64] }* %retptr, i64 0, i32 5, i64 1
+  store i64 %.14.i.i, i64* %retptr.repack15.repack19, align 8
+  %retptr.repack17.repack = getelementptr inbounds { i8*, i8*, i64, i64, float*, [2 x i64], [2 x i64] }, { i8*, i8*, i64, i64, float*, [2 x i64], [2 x i64] }* %retptr, i64 0, i32 6, i64 0
+  store i64 %.42.i.i, i64* %retptr.repack17.repack, align 8
+  %retptr.repack17.repack21 = getelementptr inbounds { i8*, i8*, i64, i64, float*, [2 x i64], [2 x i64] }, { i8*, i8*, i64, i64, float*, [2 x i64], [2 x i64] }* %retptr, i64 0, i32 6, i64 1
+  store i64 4, i64* %retptr.repack17.repack21, align 8
+  tail call void @NRT_decref(i8* %arg.B.0)
+  tail call void @NRT_decref(i8* %arg.A.0)
+  br label %common.ret
+
+B0.if:                                            ; preds = %B0.endif.endif.endif.i.i, %B0.endif.endif.i.i, %entry
+  %excinfo.1.0.ph = phi { i8*, i32, i8*, i8*, i32 }* [ @.const.picklebuf.4713003712, %entry ], [ @.const.picklebuf.4712915840, %B0.endif.endif.i.i ], [ @.const.picklebuf.4723835904, %B0.endif.endif.endif.i.i ]
+  store { i8*, i32, i8*, i8*, i32 }* %excinfo.1.0.ph, { i8*, i32, i8*, i8*, i32 }** %excinfo, align 8
+  br label %common.ret
+
+B0.endif.endif:                                   ; preds = %B0.endif.endif.endif.i.i
+  %.5.i.i.i = getelementptr i8, i8* %.7.i.i.i.i, i64 24
+  %0 = bitcast i8* %.5.i.i.i to float**
+  %.6.i1.i.i = load float*, float** %0, align 8, !noalias !15
+  %.32.i.i = shl nsw i64 %.38.i.i, 2
+  %.33.i.i = bitcast float* %.6.i1.i.i to i8*
+  tail call void @llvm.memset.p0i8.i64(i8* align 1 %.33.i.i, i8 0, i64 %.32.i.i, i1 false), !noalias !16
+  %.18856.not = icmp eq i32 %arg.m, 0
+  br i1 %.18856.not, label %B104, label %B32.endif.lr.ph
+
+B32.endif.lr.ph:                                  ; preds = %B0.endif.endif
+  %.30953.not = icmp slt i32 %arg.n, 1
+  %.611 = ptrtoint float* %arg.A.4 to i64
+  %.717 = ptrtoint float* %arg.B.4 to i64
+  %.43050.not = icmp eq i32 %arg.k, 0
+  %or.cond = select i1 %.30953.not, i1 true, i1 %.43050.not
+  br i1 %or.cond, label %B104, label %B32.endif.us.us.preheader
+
+B32.endif.us.us.preheader:                        ; preds = %B32.endif.lr.ph
+  %wide.trip.count79 = zext i32 %arg.m to i64
+  %wide.trip.count74 = zext i32 %arg.n to i64
+  %wide.trip.count = zext i32 %arg.k to i64
+  br label %B32.endif.us.us
+
+B32.endif.us.us:                                  ; preds = %B32.endif.us.us.preheader, %B42.B30.loopexit_crit_edge.split.us.us.us
+  %indvars.iv76 = phi i64 [ 0, %B32.endif.us.us.preheader ], [ %indvars.iv.next77, %B42.B30.loopexit_crit_edge.split.us.us.us ]
+  %.507.us.us = mul nsw i64 %indvars.iv76, %.14.i.i
+  %.509.us.us = getelementptr float, float* %.6.i1.i.i, i64 %.507.us.us
+  %.610.us.us = mul i64 %indvars.iv76, %arg.A.6.0
+  %.612.us.us = add i64 %.610.us.us, %.611
+  br label %B44.endif.us.us.us
+
+B44.endif.us.us.us:                               ; preds = %B54.B42.loopexit_crit_edge.us.us.us, %B32.endif.us.us
+  %indvars.iv71 = phi i64 [ %indvars.iv.next72, %B54.B42.loopexit_crit_edge.us.us.us ], [ 0, %B32.endif.us.us ]
+  %.570.us.us.us = getelementptr float, float* %.509.us.us, i64 %indvars.iv71
+  %.778.us.us.us = mul i64 %indvars.iv71, %arg.B.6.1
+  %.718.us.us.us = add i64 %.778.us.us.us, %.717
+  %.571.us.us.us.pre = load float, float* %.570.us.us.us, align 4
+  br label %B56.us.us.us
+
+B56.us.us.us:                                     ; preds = %B44.endif.us.us.us, %B56.us.us.us
+  %.571.us.us.us = phi float [ %.571.us.us.us.pre, %B44.endif.us.us.us ], [ %.787.us.us.us, %B56.us.us.us ]
+  %indvars.iv = phi i64 [ 0, %B44.endif.us.us.us ], [ %indvars.iv.next, %B56.us.us.us ]
+  %indvars.iv.next = add nuw nsw i64 %indvars.iv, 1
+  %.671.us.us.us = mul i64 %indvars.iv, %arg.A.6.1
+  %.673.us.us.us = add i64 %.612.us.us, %.671.us.us.us
+  %.674.us.us.us = inttoptr i64 %.673.us.us.us to float*
+  %.675.us.us.us = load float, float* %.674.us.us.us, align 4
+  %.716.us.us.us = mul i64 %indvars.iv, %arg.B.6.0
+  %.780.us.us.us = add i64 %.718.us.us.us, %.716.us.us.us
+  %.781.us.us.us = inttoptr i64 %.780.us.us.us to float*
+  %.782.us.us.us = load float, float* %.781.us.us.us, align 4
+  %.786.us.us.us = fmul float %.675.us.us.us, %.782.us.us.us
+  %.787.us.us.us = fadd float %.571.us.us.us, %.786.us.us.us
+  store float %.787.us.us.us, float* %.570.us.us.us, align 4
+  %exitcond.not = icmp eq i64 %indvars.iv.next, %wide.trip.count
+  br i1 %exitcond.not, label %B54.B42.loopexit_crit_edge.us.us.us, label %B56.us.us.us
+
+B54.B42.loopexit_crit_edge.us.us.us:              ; preds = %B56.us.us.us
+  %indvars.iv.next72 = add nuw nsw i64 %indvars.iv71, 1
+  %exitcond75.not = icmp eq i64 %indvars.iv.next72, %wide.trip.count74
+  br i1 %exitcond75.not, label %B42.B30.loopexit_crit_edge.split.us.us.us, label %B44.endif.us.us.us
+
+B42.B30.loopexit_crit_edge.split.us.us.us:        ; preds = %B54.B42.loopexit_crit_edge.us.us.us
+  %indvars.iv.next77 = add nuw nsw i64 %indvars.iv76, 1
+  %exitcond80.not = icmp eq i64 %indvars.iv.next77, %wide.trip.count79
+  br i1 %exitcond80.not, label %B104, label %B32.endif.us.us
+}
+
+
+optimized:
+define i32 @_ZN8problems8problem36matmulB2v1B38c8tJTIeFIjxB2IKSgI4CrvQClQZ6FczSBAA_3dEiii5ArrayIfLi2E1A7mutable7alignedE5ArrayIfLi2E1A7mutable7alignedE(
+  { i8*, i8*, i64, i64, float*, [2 x i64], [2 x i64] }* noalias nocapture writeonly %retptr,
+  { i8*, i32, i8*, i8*, i32 }** noalias nocapture writeonly %excinfo,
+  i32 %arg.m, i32 %arg.k, i32 %arg.n,
+  i8* %arg.A.0, i8* nocapture readnone %arg.A.1, i64 %arg.A.2, i64 %arg.A.3, float* %arg.A.4, i64 %arg.A.5.0, i64 %arg.A.5.1, i64 %arg.A.6.0, i64 %arg.A.6.1,
+  i8* %arg.B.0, i8* nocapture readnone %arg.B.1, i64 %arg.B.2, i64 %arg.B.3, float* %arg.B.4, i64 %arg.B.5.0, i64 %arg.B.5.1, i64 %arg.B.6.0, i64 %arg.B.6.1
+) local_unnamed_addr {
+entry:
+  tail call void @NRT_incref(i8* %arg.A.0)
+  tail call void @NRT_incref(i8* %arg.B.0)
+  %.m.i64 = sext i32 %arg.m to i64
+  %.k.i64 = sext i32 %arg.k to i64
+  %is.m.neg = icmp slt i32 %arg.m, 0
+  %is.k.neg = icmp slt i32 %arg.k, 0
+  %or.cond.i = or i1 %is.m.neg, %is.k.neg
+  br i1 %or.cond.i, label %B0.if, label %B0.endif.endif.i.i
+
+B0.endif.endif.i.i:
+  %.numel = mul nsw i64 %.k.i64, %.m.i64
+  %.row.stride = shl nsw i64 %.k.i64, 2
+  %.alloc.check = tail call { i64, i1 } @llvm.smul.with.overflow.i64(i64 %.numel, i64 4)
+  %overflow = extractvalue { i64, i1 } %.alloc.check, 1
+  br i1 %overflow, label %B0.if, label %B0.endif.endif.endif.i.i
+
+B0.endif.endif.endif.i.i:
+  %total.bytes = extractvalue { i64, i1 } %.alloc.check, 0
+  %meminfo = tail call i8* @NRT_MemInfo_alloc_aligned(i64 %total.bytes, i32 32)
+  %null.alloc = icmp eq i8* %meminfo, null
+  br i1 %null.alloc, label %B0.if, label %B0.endif.endif
+
+B0.if:
+  %excinfo.1.0.ph = phi { i8*, i32, i8*, i8*, i32 }* [ @.const.picklebuf.4713003712, %entry ], [ @.const.picklebuf.4712915840, %B0.endif.endif.i.i ], [ @.const.picklebuf.4723835904, %B0.endif.endif.endif.i.i ]
+  store { i8*, i32, i8*, i8*, i32 }* %excinfo.1.0.ph, { i8*, i32, i8*, i8*, i32 }** %excinfo, align 8
+  br label %common.ret
+
+B0.endif.endif:
+  %payload.ptr = getelementptr i8, i8* %meminfo, i64 24
+  %payload.float.ptr = bitcast i8* %payload.ptr to float**
+  %.data = load float*, float** %payload.float.ptr, align 8
+  %.bytes.zero = shl nsw i64 %.numel, 2
+  %data.as.i8 = bitcast float* %.data to i8*
+  tail call void @llvm.memset.p0i8.i64(i8* align 1 %data.as.i8, i8 0, i64 %.bytes.zero, i1 false)
+  %empty_check = icmp eq i32 %arg.m, 0
+  br i1 %empty_check, label %B104, label %B32.endif.lr.ph
+
+B32.endif.lr.ph:
+  %n.lt.1 = icmp slt i32 %arg.n, 1
+  %a.ptr.int = ptrtoint float* %arg.A.4 to i64
+  %b.ptr.int = ptrtoint float* %arg.B.4 to i64
+  %k.eq.0 = icmp eq i32 %arg.k, 0
+  %should.skip = or i1 %n.lt.1, %k.eq.0
+  br i1 %should.skip, label %B104, label %B32.endif.us.us.preheader
+
+B32.endif.us.us.preheader:
+  %wide.trip.count79 = zext i32 %arg.m to i64
+  %wide.trip.count74 = zext i32 %arg.n to i64
+  %wide.trip.count = zext i32 %arg.k to i64
+  br label %B32.endif.us.us
+
+B32.endif.us.us:
+  %indvars.iv76 = phi i64 [ 0, %B32.endif.us.us.preheader ], [ %indvars.iv.next77, %B42.B30.loopexit_crit_edge.split.us.us.us ]
+  %.507.us.us = mul nsw i64 %indvars.iv76, %.k.i64
+  %.509.us.us = getelementptr float, float* %.data, i64 %.507.us.us
+  %.610.us.us = mul i64 %indvars.iv76, %arg.A.6.0
+  %.612.us.us = add i64 %.610.us.us, %a.ptr.int
+  br label %B44.endif.us.us.us
+
+B44.endif.us.us.us:
+  %indvars.iv71 = phi i64 [ 0, %B32.endif.us.us ], [ %indvars.iv.next72, %B54.B42.loopexit_crit_edge.us.us.us ]
+  %.570.us.us.us = getelementptr float, float* %.509.us.us, i64 %indvars.iv71
+  %.778.us.us.us = mul i64 %indvars.iv71, %arg.B.6.1
+  %.718.us.us.us = add i64 %.778.us.us.us, %b.ptr.int
+  %.571.us.us.us.pre = load float, float* %.570.us.us.us, align 4
+  br label %B56.us.us.us
+
+B56.us.us.us:
+  %.571.us.us.us = phi float [ %.571.us.us.us.pre, %B44.endif.us.us.us ], [ %.787.us.us.us, %B56.us.us.us ]
+  %indvars.iv = phi i64 [ 0, %B44.endif.us.us.us ], [ %indvars.iv.next, %B56.us.us.us ]
+  %indvars.iv.next = add nuw nsw i64 %indvars.iv, 1
+  %.671.us.us.us = mul i64 %indvars.iv, %arg.A.6.1
+  %.673.us.us.us = add i64 %.612.us.us, %.671.us.us.us
+  %.674.us.us.us = inttoptr i64 %.673.us.us.us to float*
+  %.675.us.us.us = load float, float* %.674.us.us.us, align 4
+  %.716.us.us.us = mul i64 %indvars.iv, %arg.B.6.0
+  %.780.us.us.us = add i64 %.718.us.us.us, %.716.us.us.us
+  %.781.us.us.us = inttoptr i64 %.780.us.us.us to float*
+  %.782.us.us.us = load float, float* %.781.us.us.us, align 4
+  %.786.us.us.us = fmul float %.675.us.us.us, %.782.us.us.us
+  %.787.us.us.us = fadd float %.571.us.us.us, %.786.us.us.us
+  store float %.787.us.us.us, float* %.570.us.us.us, align 4
+  %exitcond.not = icmp eq i64 %indvars.iv.next, %wide.trip.count
+  br i1 %exitcond.not, label %B54.B42.loopexit_crit_edge.us.us.us, label %B56.us.us.us
+
+B54.B42.loopexit_crit_edge.us.us.us:
+  %indvars.iv.next72 = add nuw nsw i64 %indvars.iv71, 1
+  %exitcond75.not = icmp eq i64 %indvars.iv.next72, %wide.trip.count74
+  br i1 %exitcond75.not, label %B42.B30.loopexit_crit_edge.split.us.us.us, label %B44.endif.us.us.us
+
+B42.B30.loopexit_crit_edge.split.us.us.us:
+  %indvars.iv.next77 = add nuw nsw i64 %indvars.iv76, 1
+  %exitcond80.not = icmp eq i64 %indvars.iv.next77, %wide.trip.count79
+  br i1 %exitcond80.not, label %B104, label %B32.endif.us.us
+
+B104:
+  %retptr.repack = getelementptr inbounds { i8*, i8*, i64, i64, float*, [2 x i64], [2 x i64] }, { i8*, i8*, i64, i64, float*, [2 x i64], [2 x i64] }* %retptr, i64 0, i32 0
+  store i8* %meminfo, i8** %retptr.repack, align 8
+  %retptr.repack7 = getelementptr inbounds { i8*, i8*, i64, i64, float*, [2 x i64], [2 x i64] }, { i8*, i8*, i64, i64, float*, [2 x i64], [2 x i64] }* %retptr, i64 0, i32 1
+  store i8* null, i8** %retptr.repack7, align 8
+  %retptr.repack9 = getelementptr inbounds { i8*, i8*, i64, i64, float*, [2 x i64], [2 x i64] }, { i8*, i8*, i64, i64, float*, [2 x i64], [2 x i64] }* %retptr, i64 0, i32 2
+  store i64 %.numel, i64* %retptr.repack9, align 8
+  %retptr.repack11 = getelementptr inbounds { i8*, i8*, i64, i64, float*, [2 x i64], [2 x i64] }, { i8*, i8*, i64, i64, float*, [2 x i64], [2 x i64] }* %retptr, i64 0, i32 3
+  store i64 4, i64* %retptr.repack11, align 8
+  %retptr.repack13 = getelementptr inbounds { i8*, i8*, i64, i64, float*, [2 x i64], [2 x i64] }, { i8*, i8*, i64, i64, float*, [2 x i64], [2 x i64] }* %retptr, i64 0, i32 4
+  store float* %.data, float** %retptr.repack13, align 8
+  %retptr.repack15.0 = getelementptr inbounds { i8*, i8*, i64, i64, float*, [2 x i64], [2 x i64] }, { i8*, i8*, i64, i64, float*, [2 x i64], [2 x i64] }* %retptr, i64 0, i32 5, i64 0
+  store i64 %.m.i64, i64* %retptr.repack15.0, align 8
+  %retptr.repack15.1 = getelementptr inbounds { i8*, i8*, i64, i64, float*, [2 x i64], [2 x i64] }, { i8*, i8*, i64, i64, float*, [2 x i64], [2 x i64] }* %retptr, i64 0, i32 5, i64 1
+  store i64 %.k.i64, i64* %retptr.repack15.1, align 8
+  %retptr.repack17.0 = getelementptr inbounds { i8*, i8*, i64, i64, float*, [2 x i64], [2 x i64] }, { i8*, i8*, i64, i64, float*, [2 x i64], [2 x i64] }* %retptr, i64 0, i32 6, i64 0
+  store i64 %.row.stride, i64* %retptr.repack17.0, align 8
+  %retptr.repack17.1 = getelementptr inbounds { i8*, i8*, i64, i64, float*, [2 x i64], [2 x i64] }, { i8*, i8*, i64, i64, float*, [2 x i64], [2 x i64] }* %retptr, i64 0, i32 6, i64 1
+  store i64 4, i64* %retptr.repack17.1, align 8
+  tail call void @NRT_decref(i8* %arg.B.0)
+  tail call void @NRT_decref(i8* %arg.A.0)
+  br label %common.ret
+
+common.ret:
+  %common.ret.op = phi i32 [ 0, %B104 ], [ 1, %B0.if ]
+  ret i32 %common.ret.op
+}
+
+
+original:
+; Function Attrs: argmemonly mustprogress nofree nosync nounwind willreturn writeonly
+define i32 @_ZN8problems8problem13fooB2v1B38c8tJTIeFIjxB2IKSgI4CrvQClQZ6FczSBAA_3dEd(double* noalias nocapture writeonly %retptr, { i8*, i32, i8*, i8*, i32 }** noalias nocapture readnone %excinfo, double %arg.x) local_unnamed_addr #0 {
+for.end.1:
+  %.25 = tail call double @llvm.sin.f64(double %arg.x)
+  %.5 = fneg double %arg.x
+  %.13 = tail call double @llvm.exp.f64(double %.5)
+  %.30 = fmul double %.13, %.25
+  store double %.30, double* %retptr, align 8
+  ret i32 0
+}
+
+optimized:
+; Function Attrs: argmemonly mustprogress nofree nosync nounwind willreturn writeonly
+define i32 @_ZN8problems8problem13fooB2v1B38c8tJTIeFIjxB2IKSgI4CrvQClQZ6FczSBAA_3dEd(
+    double* noalias nocapture writeonly %retptr,
+    { i8*, i32, i8*, i8*, i32 }** noalias nocapture readnone %excinfo,
+    double %arg.x
+) local_unnamed_addr #0 {
+for.end.1:
+  %.sin = tail call double @llvm.sin.f64(double %arg.x)
+  %.exp = tail call double @llvm.exp.f64(double -1.0 * %arg.x)
+  %.result = fmul double %.exp, %.sin
+  store double %.result, double* %retptr, align 8
+  ret i32 0
+}
